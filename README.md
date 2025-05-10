@@ -18,4 +18,4 @@
 ---
 
 ## Dependências
-Projeto utiliza a biblioteca CLI-lib (requisito obrigatório)
+Projeto utiliza a biblioteca [CLI-lib](https://github.com/tgfb/cli-lib) (requisito obrigatório)
