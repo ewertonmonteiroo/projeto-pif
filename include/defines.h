@@ -1,0 +1,34 @@
+#ifndef DEFINES_H
+#define DEFINES_H
+
+#define LARGURA 20
+#define ALTURA 20
+#define CELULA_OBSTACULO 'X'
+#define CELULA_VAZIA ' '
+#define EXIBICAO_CARRO 'O'
+#define EXIBICAO_OBSTACULO 'X'
+#define EXIBICAO_PROJETIL '^'
+
+#define MAX_PROJETEIS 15
+#define MAX_NOME 50
+#define RANKING_FILE "ranking.txt"
+#define CHUVA_X_DURACAO 20
+#define PONTOS_EVENTO 100
+#define ATRASO_INICIAL 250000
+#define PROB_OBSTACULO_INICIAL 4
+#define PONTOS_PROJETIL 5
+
+typedef enum {
+    COR_RESET,
+    COR_PRETO,
+    COR_VERMELHO,
+    COR_VERDE,
+    COR_AMARELO,
+    COR_AZUL,
+    COR_MAGENTA,
+    COR_CIANO,
+    COR_BRANCO,
+    COR_BRANCO_NEGRITO
+} TerminalCor;
+
+#endif
