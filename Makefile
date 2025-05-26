@@ -1,22 +1,34 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -I.
-LDFLAGS = 
-SRC = main.c game.c cli-lib/screen.c cli-lib/keyboard.c cli-lib/timer.c
-OBJ = $(SRC:.c=.o)
-TARGET = projeto-pif
+CFLAGS = -Wall -g
+SRC_DIR = src
+INC_DIR = include
+BUILD_DIR = build
+SRCS = $(wildcard $(SRC_DIR)/*.c)
+OBJS = $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(SRCS))
+TARGET = $(BUILD_DIR)/corrida_texto
 
 all: $(TARGET)
 
-$(TARGET): $(OBJ)
-	$(CC) $(LDFLAGS) $(OBJ) -o $@
+$(TARGET): $(OBJS)
+	@mkdir -p $(BUILD_DIR)
+	$(CC) $(CFLAGS) $^ -o $@ # <-- Aqui estava o problema principal: $^ são os objetos .o
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(BUILD_DIR)
+	$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
 
 clean:
-	rm -f $(OBJ) $(TARGET)
+	rm -rf $(BUILD_DIR)
 
-run: $(TARGET)
+run: all
 	./$(TARGET)
 
-.PHONY: all clean run
+.PHONY: debug
+debug:
+	@echo "SRCDIR: $(SRCDIR)"
+	@echo "SRC_DIR: $(SRC_DIR)" # Parece que você usou SRC_DIR, vamos verificar
+	@echo "BUILD_DIR: $(BUILD_DIR)"
+	@echo "INC_DIR: $(INC_DIR)"
+	@echo "SRCS: $(SRCS)"
+	@echo "OBJS: $(OBJS)"
+	@echo "TARGET: $(TARGET)"
